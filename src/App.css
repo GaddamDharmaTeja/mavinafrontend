@@ -1,0 +1,7 @@
+.app-loading{
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    color:#0d581e;
+    font:600 18px system-ui
+}

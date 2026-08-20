@@ -1,0 +1,6 @@
+import { Link } from "react-router-dom";
+import PageLayout from "../components/layout/PageLayout";
+import { useShop } from "../context/ShopContext";
+import "./Cart.css";
+function Cart() { const { cart, removeFromCart, changeQuantity } = useShop(); const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0); return <PageLayout><main className="cart-page"><h1>Your Cart</h1>{cart.length ? <><div className="cart-list">{cart.map(item => <article className="cart-row" key={item.id}><img src={item.image} alt=""/><div><h2>{item.name} Mangoes</h2><p>₹{item.price} / {item.weight}</p></div><input aria-label={`Quantity for ${item.name}`} type="number" min="1" value={item.quantity} onChange={e=>changeQuantity(item.id, Number(e.target.value))}/><strong>₹{item.price * item.quantity}</strong><button onClick={()=>removeFromCart(item.id)}>Remove</button></article>)}</div><aside className="order-summary"><span>Subtotal</span><strong>₹{total}</strong><span>Delivery</span><strong>Free</strong><hr/><b>Total ₹{total}</b><Link to="/checkout">Proceed to checkout</Link></aside></> : <section className="empty-cart"><p>Your basket is waiting for fresh mangoes.</p><Link to="/shop">Browse mangoes</Link></section>}</main></PageLayout>; }
+export default Cart;

@@ -1,0 +1,5 @@
+import { useEffect, useState } from "react";
+import PageLayout from "../components/layout/PageLayout";
+import { getFarms } from "../services/productService";
+import "./CommercePages.css";
+export default function Farms(){const [farms,setFarms]=useState([]);useEffect(()=>{getFarms().then(items=>setFarms(Array.isArray(items)?items:[])).catch(()=>setFarms([]));},[]);return <PageLayout><main className="screen"><header className="page-title"><p>MEET OUR GROWERS</p><h1>Farm partners</h1><span>Trusted farms growing mangoes with care, patience, and local knowledge.</span></header><div className="blog-grid">{farms.map(farm=><article key={farm.id}><img src={farm.imageUrl||"/logo192.png"} alt={farm.name}/><div><h2>{farm.name}</h2><p>{farm.description||farm.address}</p><p><b>{farm.acreage||"—"}</b> acres · {farm.address}</p>{farm.latitude&&farm.longitude&&<a href={`https://www.google.com/maps/search/?api=1&query=${farm.latitude},${farm.longitude}`} target="_blank" rel="noreferrer">View on Google Maps →</a>}</div></article>)}</div>{!farms.length&&<p className="empty-note">Our farm partner directory is growing. Please check back soon.</p>}</main></PageLayout>}

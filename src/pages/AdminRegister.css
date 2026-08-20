@@ -1,0 +1,164 @@
+/* ==========================================
+   ADMIN REGISTER PAGE
+========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-auth-page {
+  min-height: 100vh;
+  background: linear-gradient(
+      rgba(8, 45, 22, 0.75),
+      rgba(8, 45, 22, 0.75)
+    ),
+    url("../assets/backgroundimages/shop-banner.png") center/cover no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.auth-card {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  padding: 45px;
+  box-shadow: 0 25px 60px rgba(0,0,0,.25);
+}
+
+.auth-card h2 {
+  text-align: center;
+  color: #0b7d3b;
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.auth-card p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  transition: .3s;
+  outline: none;
+}
+
+.auth-card input:focus {
+  border-color: #0b7d3b;
+  box-shadow: 0 0 0 4px rgba(11,125,59,.15);
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.auth-card button {
+  margin-top: 15px;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg,#0b7d3b,#06692f);
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.auth-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(11,125,59,.35);
+}
+
+/* ==========================================
+   LOGIN LINK
+========================================== */
+
+.auth-card .login-link {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 15px;
+}
+
+.auth-card .login-link a {
+  color: #0b7d3b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-card .login-link a:hover {
+  color: #f4b400;
+}
+
+/* ==========================================
+   LOGO
+========================================== */
+
+.logo {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.logo img {
+  width: 80px;
+  margin-bottom: 12px;
+}
+
+.logo h1 {
+  color: #0b7d3b;
+  font-size: 30px;
+}
+
+.logo span {
+  color: #777;
+  font-size: 14px;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+  .admin-auth-page{
+    padding:20px;
+  }
+
+  .auth-card{
+    padding:30px;
+  }
+
+  .auth-card h2{
+    font-size:28px;
+  }
+
+}
+.auth-card .register-message{margin:0;text-align:center;color:#b42318;font-size:14px}

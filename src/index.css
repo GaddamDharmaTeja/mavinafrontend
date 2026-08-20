@@ -1,0 +1,3 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+:root{--forest:#103f28;--leaf:#167044;--lime:#eaf5df;--cream:#fbfaf4;--ink:#1d2a22;--muted:#66736b;--gold:#e9a916;--line:#e2e9df;--shadow:0 16px 40px rgba(27,65,42,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}button,input,select,textarea{font:inherit}button{transition:transform .2s,box-shadow .2s,background .2s}button:hover{transform:translateY(-1px)}a{transition:color .2s}::selection{background:#ccebc5;color:var(--forest)}

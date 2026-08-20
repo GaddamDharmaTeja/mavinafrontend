@@ -1,0 +1,8 @@
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getContent } from "../../services/productService";
+import { FaEnvelope, FaFacebookF, FaInstagram, FaPhoneAlt, FaShieldAlt, FaWhatsapp } from "react-icons/fa";
+import "./Footer.css";
+const links=[["Explore",[["Shop","/shop"],["Mango varieties","/mangoes"],["Our farms","/gallery"],["Our story","/about"]]],["Customer care",[["Track order","/track-order"],["My account","/profile"],["Orders","/orders"],["Contact us","/contact"]]]];
+function Footer(){const [settings,setSettings]=useState(null);useEffect(()=>{getContent("footer").then(item=>setSettings(item.value)).catch(()=>setSettings(null));},[]);if(!settings)return null;const data=settings;return <footer className="footer"><section className="footer-features">{(data.features||[]).map(feature=><span key={feature}><FaShieldAlt/> {feature}</span>)}</section><div className="footer-main"><div className="footer-grid"><section><h2>{data.name}</h2><p>{data.description}</p><div className="social-icons"><a href={data.facebook||"#"} aria-label="Facebook"><FaFacebookF/></a><a href={data.instagram||"#"} aria-label="Instagram"><FaInstagram/></a><a href={data.whatsapp||"#"} aria-label="WhatsApp"><FaWhatsapp/></a></div></section>{links.map(([title,items])=><section key={title}><h3>{title}</h3>{items.map(([name,to])=><Link key={to} to={to}>{name}</Link>)}</section>)}<section><h3>Contact</h3><p><FaPhoneAlt/> {data.phone}</p><p><FaEnvelope/> {data.email}</p><p>{data.location}</p></section></div></div><div className="footer-bottom"><span>© {data.year||new Date().getFullYear()} {data.name}. All rights reserved.</span></div></footer>}
+export default Footer;

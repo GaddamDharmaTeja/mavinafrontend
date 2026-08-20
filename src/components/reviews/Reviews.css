@@ -1,0 +1,122 @@
+.reviews{
+    padding:80px 0;
+    background:#fffdf8;
+}
+
+.reviews-container{
+    width:90%;
+    max-width:1300px;
+    margin:auto;
+}
+
+.reviews-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.reviews-title h2{
+    font-size:42px;
+    color:#1f4d1c;
+}
+
+/* Three Cards */
+
+.review-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.review-card{
+    background:#fff;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.review-card:hover{
+    transform:translateY(-8px);
+}
+
+.quote{
+    font-size:40px;
+    color:#2E7D32;
+}
+
+.review-card p{
+    line-height:1.8;
+    color:#555;
+    margin:20px 0;
+}
+
+.stars{
+    color:#F4B400;
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.customer{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.avatar{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#1B5E20;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.customer h4{
+    margin:0;
+    color:#1B5E20;
+}
+
+.customer span{
+    color:#777;
+    font-size:14px;
+}
+
+.dots{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:30px;
+}
+
+.dots span{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#ccc;
+}
+
+.dots .active{
+    background:#1B5E20;
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+    .review-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:768px){
+    .review-grid{
+        grid-template-columns:1fr;
+    }
+
+    .reviews-title h2{
+        font-size:32px;
+    }
+}

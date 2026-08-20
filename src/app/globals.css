@@ -1,0 +1,6 @@
+/* App-shell reset only. Visual styles remain in the original Mavinamane CSS files. */
+*{box-sizing:border-box}
+html,body{margin:0;min-width:320px}
+body{background:#fbfaf4;color:#1d2a22}
+button,input,select,textarea{font:inherit}
+img{max-width:100%}

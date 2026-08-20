@@ -1,0 +1,9 @@
+import { Link, useParams } from "react-router-dom";
+import { useEffect,useState } from "react";
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import PageLayout from "../components/layout/PageLayout";
+import { getProduct } from "../services/productService";
+import { useShop } from "../context/ShopContext";
+import "./ProductDetails.css";
+function ProductDetails(){const {productId}=useParams();const [product,setProduct]=useState(null);const {addToCart,wishlist,toggleWishlist}=useShop();useEffect(()=>{getProduct(productId).then(setProduct).catch(()=>setProduct(false));},[productId]);if(product===null)return <PageLayout><main className="product-details">Loading product…</main></PageLayout>;if(!product)return <PageLayout><main className="product-details"><Link className="back-link" to="/shop">← Back to shop</Link><p>This product is no longer available.</p></main></PageLayout>;const saved=wishlist.some(item=>item.id===product.id);return <PageLayout><main className="product-details"><Link className="back-link" to="/shop">← Back to shop</Link><section className="product-layout">{product.image?<img src={product.image} alt={product.name}/>:<div/>}<div><p className="product-type">Fresh from our orchard</p><h1>{product.name}</h1><div className="detail-rating">★★★★★ <span>{product.rating||0} ({product.reviews||0} reviews)</span></div><p className="detail-price">₹{product.price} <small>/ {product.weight}</small></p><p>{product.description}</p><dl><div><dt>Availability</dt><dd>{product.stockQuantity>0?`${product.stockQuantity} in stock`:'Out of stock'}</dd></div></dl><div className="detail-actions"><button disabled={!product.stockQuantity} onClick={()=>addToCart(product)}><FaShoppingCart/> Add to cart</button><button className="wish-button" onClick={()=>toggleWishlist(product)}><FaHeart/> {saved?'Saved':'Save'}</button></div></div></section></main></PageLayout>}
+export default ProductDetails;

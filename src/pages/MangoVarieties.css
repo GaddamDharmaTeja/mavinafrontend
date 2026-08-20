@@ -1,0 +1,214 @@
+.mango-varieties {
+  background: #fdf8ed;
+  padding: 96px 24px;
+}
+
+.mango-varieties-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mango-varieties-eyebrow {
+  display: inline-block;
+  color: #1b4332;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.mango-varieties-title {
+  color: #123023;
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.mango-varieties-subtitle {
+  color: #6b6b63;
+  max-width: 480px;
+  margin: 0 auto 48px;
+  line-height: 1.6;
+}
+
+.mango-varieties-stage {
+  position: relative;
+}
+
+.mango-varieties-track-wrap {
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.mango-varieties-track {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mango-slide {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 0 8px;
+}
+
+.mango-slide-image {
+  aspect-ratio: 4 / 3;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.mango-slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mango-slide-body {
+  text-align: left;
+  padding: 0 24px;
+}
+
+.mango-slide-tag {
+  display: inline-block;
+  background: #eaf3de;
+  color: #1b4332;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.mango-slide-body h3 {
+  color: #123023;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.mango-slide-body p {
+  color: #6b6b63;
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+
+.mango-slide-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.mango-slide-price b {
+  color: #123023;
+  font-size: 24px;
+}
+
+.mango-slide-price span {
+  color: #a8a396;
+  font-size: 14px;
+}
+
+.mango-slide-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1b4332;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.mango-slide-cta:hover {
+  opacity: 0.9;
+}
+
+.mango-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #e5e0d3;
+  background: #fdf8ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #123023;
+  font-size: 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease;
+}
+
+.mango-arrow:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mango-arrow-left {
+  left: -21px;
+}
+
+.mango-arrow-right {
+  right: -21px;
+}
+
+.mango-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.mango-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: none;
+  background: #d9cfb8;
+  cursor: pointer;
+  padding: 0;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.mango-dot.active {
+  width: 28px;
+  background: #e8a33d;
+}
+
+@media (max-width: 768px) {
+  .mango-slide {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .mango-slide-body {
+    padding: 0;
+    text-align: center;
+  }
+
+  .mango-slide-price {
+    justify-content: center;
+  }
+
+  .mango-arrow {
+    display: none;
+  }
+
+  .mango-varieties-title {
+    font-size: 30px;
+  }
+}
