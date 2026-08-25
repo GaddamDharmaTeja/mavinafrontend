@@ -7,10 +7,9 @@ function PageLayout(
     }
 )
  { 
-    const { cart } = useShop();
+     const { cart } = useShop();
      return <>
      <Header cartCount={cart.reduce((total, item) => total + item.quantity, 0)} />
-    
     {children}
     <Footer /></>; 
 }

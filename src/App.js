@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { ShopProvider } from "./context/ShopContext";
 import Home from "./components/home/Home";
@@ -10,14 +10,19 @@ import AdminRegister from "./pages/AdminRegister";
 import { Blog, Contact, Faq, Shipping, Wishlist } from "./pages/CommercePages";
 import CustomerOrders from "./pages/CustomerOrders";
 import { DynamicAbout, DynamicTrackOrder } from "./pages/DynamicPages";
-import ProfilePage from "./pages/ProfilePage";
-import PaymentCheckout from "./pages/ModernCheckout";
+import ProfilePage from "./pages/ProfileWorkspace";
+import PaymentCheckout from "./pages/CodCheckout";
 import { AdminDashboard, AdminLogin } from "./pages/Admin";
 import UserAuth from "./pages/UserAuth";
 import SellerApply from "./pages/SellerApply";
 import Farms from "./pages/Farms";
 import "./App.css";
+import "./responsive-foundation.css";
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
+function CheckoutGate() {
+  const customer = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("customer") || "null") : null;
+  return customer ? <PaymentCheckout /> : <Navigate to="/login?redirect=/checkout" replace />;
+}
 function App() { 
     return <ShopProvider>
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
@@ -27,7 +32,7 @@ function App() {
         <Route path="/mangoes" element={<Mangoes/>}/>
         <Route path="/products/:productId" element={<ProductDetails/>}/>
         <Route path="/cart" element={<Cart/>}/>
-        <Route path="/checkout" element={<PaymentCheckout/>}/>
+        <Route path="/checkout" element={<CheckoutGate/>}/>
         <Route path="/admin/login" element={<AdminLogin/>}/>
         <Route path="/admin" element={<AdminDashboard/>}/>
         <Route path="/login" element={<UserAuth/>}/>

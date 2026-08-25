@@ -9,6 +9,7 @@ import LiveDashboard from "./LiveDashboard";
 import { DeliveryZonesPanel, FarmsPanel, SellerApplicationsPanel } from "./OperationsPanels";
 import { ContactMessagesPanel, ExportsPanel, NotificationsPanel, PaymentsPanel } from "./AdminTools";
 import SettingsPanel from "./SettingsPanel";
+import AdminDeliveryCharges from "./AdminDeliveryChargesRedesigned";
 import {
   FiBell,
   FiBox,
@@ -66,6 +67,7 @@ const navigation = [
   ["Farms", FiImage],
   ["Seller Applications", FiBox],
   ["Delivery Zones", FiTruck],
+  ["Delivery Charges", FiTruck],
   ["Notifications", FiBell],
   ["Contact Messages", FiMail],
   ["Exports", FiDownload],
@@ -316,6 +318,8 @@ export function AdminDashboard() {
           load();
         }}
       />
+    ) : tab === "Delivery Charges" ? (
+      <AdminDeliveryCharges onNotice={setNotice} />
     ) : tab === "Notifications" ? (
       <NotificationsPanel email={adminEmail} />
     ) : tab === "Contact Messages" ? (

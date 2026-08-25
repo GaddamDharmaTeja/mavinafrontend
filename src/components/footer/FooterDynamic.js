@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { assetUrl, getContent } from "../../services/productService";
 import "./Footer.css";
+import "./FooterModern.css";
 
 const defaultSections = [
   {

@@ -1,0 +1,63 @@
+/* Shared responsive foundation for the storefront and admin workspace. */
+html, body, #root { max-width: 100%; overflow-x: hidden; }
+img, svg, video { max-width: 100%; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+
+.header .container { width: min(100%, 1280px); }
+.header-icons button, .header-icons a { min-width: 38px; min-height: 38px; display: inline-flex; align-items: center; justify-content: center; }
+
+/* Keep content sections from touching the viewport edges on small screens. */
+.shop-page, .mango-section, .reviews, .newsletter, .whyChoose { width: 100%; }
+.mango-section, .reviews-container, .newsletter-container, .why-container { max-width: 1280px; margin-left: auto; margin-right: auto; }
+
+/* Product and content grids collapse gracefully instead of creating horizontal scroll. */
+@media (max-width: 1100px) {
+  .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .mango-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .shop-content { padding-left: 20px; padding-right: 20px; }
+}
+
+@media (max-width: 760px) {
+  .utility-inner { padding: 0 14px; }
+  .header .container { padding: 9px 14px; }
+  .header-icons { gap: 3px; }
+  .header-icons button, .header-icons a { min-width: 34px; min-height: 34px; padding: 5px; }
+
+  .mango-section, .reviews-container, .newsletter-container, .why-container { width: calc(100% - 28px); }
+  .mango-grid, .products-grid, .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 14px !important; }
+  .mango-card, .product-card { min-width: 0; }
+  .mango-card img, .product-image { aspect-ratio: 1 / .86; object-fit: cover; }
+
+  .newsletter-form { flex-wrap: wrap; }
+  .newsletter-form input { min-width: 0; flex: 1 1 180px; }
+  .newsletter-form button { flex: 0 0 auto; }
+  .review-grid { grid-template-columns: 1fr 1fr !important; gap: 14px !important; }
+
+  .admin-topbar { min-height: 70px; }
+  .admin-topbar h1 { font-size: clamp(18px, 5vw, 26px); }
+  .admin-page { width: 100%; overflow-x: hidden; }
+  .admin-table-card { max-width: 100%; }
+  .admin-table-card table { min-width: 620px; }
+
+  .form-grid, .field-grid, .form-columns { min-width: 0; }
+  input, select, textarea { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .logo-img { width: 150px !important; }
+  .header-icons button:first-child { display: none; }
+  .header-icons { margin-left: auto; }
+  .nav-links { padding: 5px 0 8px; }
+  .nav-links a { padding: 0 4px; }
+
+  .mango-section, .reviews-container, .newsletter-container, .why-container { width: calc(100% - 22px); }
+  .mango-grid, .products-grid, .product-grid, .review-grid { grid-template-columns: 1fr !important; }
+  .section-header { align-items: flex-start; gap: 8px; flex-direction: column; }
+  .mango-card img, .product-image { aspect-ratio: 1.4 / 1; }
+  .newsletter-form { display: grid; grid-template-columns: 1fr; }
+  .newsletter-form button { width: 100%; }
+  .admin-page { padding: 10px !important; }
+  .admin-topbar { padding: 0 10px !important; }
+  .stat-row { grid-template-columns: 1fr !important; }
+}

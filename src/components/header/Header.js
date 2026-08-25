@@ -1,13 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
 import { FiHeart, FiMenu, FiSearch, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
 import { FaLeaf, FaPhoneAlt, FaTruck } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Header.css";
 import logo from "../../assets/backgroundimages/logo.png";
 function Header({ 
     cartCount=0 
 }) { 
     const [open,setOpen]=useState(false);
+    const [customer,setCustomer]=useState(null);
+    useEffect(()=>{const read=()=>{try{setCustomer(JSON.parse(localStorage.getItem("customer")||"null"));}catch{setCustomer(null);}};read();window.addEventListener("storage",read);window.addEventListener("customer-auth-changed",read);return()=>{window.removeEventListener("storage",read);window.removeEventListener("customer-auth-changed",read);};},[]);
      return <><div className="utility-bar">
         <div className="utility-inner">
             <span><FaLeaf/> 100% Natural &amp; Organic</span>
@@ -36,7 +38,7 @@ function Header({
                             <div className="header-icons">
                                 <button aria-label="Search"><FiSearch/></button>
                                 <NavLink to="/wishlist" aria-label="Wishlist"><FiHeart/></NavLink>
-                                <NavLink to="/login" aria-label="Account"><FiUser/></NavLink>
+                                <NavLink to={customer ? "/profile" : "/login"} aria-label={customer ? "My account" : "Sign in"}><FiUser/></NavLink>
                                 <NavLink className="cart-icon" to="/cart" aria-label="Cart"><FiShoppingCart/>{cartCount>0&&<b>{cartCount}</b>}</NavLink>
                                 </div>
                                 </div>

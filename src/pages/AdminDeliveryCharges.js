@@ -1,0 +1,14 @@
+import { useEffect, useState } from "react";
+import { deleteDeliveryCharge, getDeliveryCharges, saveDeliveryCharge } from "../services/productService";
+
+const empty = type => ({ type, minValue: "", maxValue: "", charge: "", active: true });
+
+export default function AdminDeliveryCharges({ onNotice }) {
+  const [slabs, setSlabs] = useState([]); const [editing, setEditing] = useState(null); const [error, setError] = useState("");
+  async function load(){ try { setSlabs(await getDeliveryCharges()); } catch(e){setError(e.message);} }
+  useEffect(()=>{load();},[]);
+  async function save(event){event.preventDefault();const form=new FormData(event.currentTarget);const value={...editing,minValue:Number(form.get("minValue")),maxValue:form.get("maxValue")?Number(form.get("maxValue")):null,charge:Number(form.get("charge")),active:form.get("active")==="on"};try{await saveDeliveryCharge(value);setEditing(null);setError("");onNotice?.("Delivery charge slab saved.");load();}catch(e){setError(e.message);}}
+  async function remove(id){if(!window.confirm("Delete this slab?"))return;try{await deleteDeliveryCharge(id);load();}catch(e){setError(e.message);}}
+  const group=type=>slabs.filter(item=>item.type===type);
+  return <section className="admin-module"><div className="module-heading"><div><p className="eyebrow">CHECKOUT CONFIGURATION</p><h2>Delivery Charges</h2></div><button className="primary-button" onClick={()=>setEditing(empty("DISTANCE"))}>Add Distance Slab</button></div>{error&&<p className="admin-error">{error}</p>}{["DISTANCE","WEIGHT"].map(type=><div className="admin-table-card" key={type}><div className="module-heading"><h3>{type==="DISTANCE"?"Distance Charges (KM)":"Weight Charges (KG)"}<button className="secondary-button" onClick={()=>setEditing(empty(type))}>+ Add slab</button></h3></div><table><thead><tr><th>Min</th><th>Max</th><th>Charge</th><th>Status</th><th>Actions</th></tr></thead><tbody>{group(type).map(row=><tr key={row.id}><td>{row.minValue}</td><td>{row.maxValue??"∞"}</td><td>₹{row.charge}</td><td>{row.active?"Active":"Disabled"}</td><td><button onClick={()=>setEditing(row)}>Edit</button><button onClick={()=>remove(row.id)}>Delete</button></td></tr>)}</tbody></table></div>)}{editing&&<div className="admin-modal"><form onSubmit={save}><h3>{editing.id?"Edit":"Add"} {editing.type.toLowerCase()} slab</h3><label>Minimum<input name="minValue" type="number" min="0" step="0.01" defaultValue={editing.minValue}/></label><label>Maximum (blank for ∞)<input name="maxValue" type="number" min="0" step="0.01" defaultValue={editing.maxValue??""}/></label><label>Charge<input name="charge" type="number" min="0" step="0.01" defaultValue={editing.charge}/></label><label><input name="active" type="checkbox" defaultChecked={editing.active}/> Active</label><button type="submit" className="primary-button">Save</button><button type="button" onClick={()=>setEditing(null)}>Cancel</button></form></div>}</section>;
+}

@@ -1,0 +1,1 @@
+.back-button{display:inline-flex;align-items:center;gap:8px;border:1px solid #d9e4d5;background:#fff;color:#1c5633;border-radius:999px;padding:9px 15px;font-weight:700;cursor:pointer;transition:background .2s ease,transform .2s ease}.back-button:hover{background:#edf7e8;transform:translateX(-2px)}
