@@ -1,0 +1,50 @@
+@media (max-width: 600px) {
+  .admin-login-screen {
+    display: block !important;
+    min-height: 100dvh !important;
+    padding: 12px !important;
+    overflow-y: auto !important;
+  }
+
+  .admin-login-screen .login-promo { display: none !important; }
+
+  .admin-login-screen .login-card {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 28px 20px !important;
+    box-sizing: border-box !important;
+    border-radius: 20px !important;
+    text-align: left !important;
+  }
+
+  .admin-login-screen .login-symbol { margin: 0 auto 14px !important; }
+  .admin-login-screen .login-card h2 {
+    font-size: 30px !important;
+    line-height: 1.1 !important;
+    letter-spacing: normal !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+  .admin-login-screen .login-card > p { text-align: center !important; }
+  .admin-login-screen .login-card label { font-size: 14px !important; }
+  .admin-login-screen .login-card label input {
+    display: block;
+    width: 100% !important;
+    min-height: 48px !important;
+    font-size: 16px !important;
+  }
+  .admin-login-screen .remember {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    white-space: nowrap !important;
+  }
+  .admin-login-screen .remember label {
+    display: flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+  }
+}

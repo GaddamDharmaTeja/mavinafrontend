@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./Admin.css";
 import "./ModernOrchard.css";
 import "./AdminHeader.css";
+import "./AdminLoginMobile.css";
 import ContentModule from "./AdminContentModule";
 import LiveDashboard from "./LiveDashboard";
 import { DeliveryZonesPanel, FarmsPanel, SellerApplicationsPanel } from "./OperationsPanels";
@@ -254,7 +255,7 @@ export function AdminDashboard() {
         }}
         upload={async (e) => {
           try {
-            const upload = await uploadAdminImage(e.target.files[0]);
+            const upload = await uploadAdminImage(e.target.files[0], "PRODUCT", editing?.id);
             setEditing({ ...editing, imageUrl: upload.url });
           } catch (err) {
             setNotice(err.message);
@@ -1099,3 +1100,4 @@ const Placeholder = ({ title, configure }) => (
     </button>
   </section>
 );
+
