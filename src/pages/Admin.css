@@ -856,7 +856,8 @@ color:#ce2c2c}
   white-space:nowrap}
 
   .admin-sidebar .signout {
-  display:none}
+  display:flex!important;
+  margin-top:8px}
 
   .admin-topbar {
   padding:0 13px}

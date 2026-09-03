@@ -60,4 +60,36 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   .admin-page { padding: 10px !important; }
   .admin-topbar { padding: 0 10px !important; }
   .stat-row { grid-template-columns: 1fr !important; }
+
+  /* Admin login becomes a focused, full-width mobile form. */
+  .admin-login-screen {
+    display: block !important;
+    min-height: 100dvh !important;
+    padding: 12px !important;
+    overflow-y: auto;
+  }
+  .admin-login-screen .login-promo { display: none !important; }
+  .admin-login-screen .login-card {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: 28px 20px !important;
+    border-radius: 20px !important;
+    text-align: left !important;
+  }
+  .admin-login-screen .login-symbol { margin: 0 auto 14px; }
+  .admin-login-screen .login-card h2,
+  .admin-login-screen .login-card > p { text-align: center; }
+  .admin-login-screen .login-card h2 {
+    font-size: 30px !important;
+    line-height: 1.1 !important;
+    white-space: normal;
+  }
+  .admin-login-screen .login-card label { font-size: 14px !important; }
+  .admin-login-screen .login-card input {
+    width: 100% !important;
+    min-height: 48px;
+    font-size: 16px !important;
+  }
+  .admin-login-screen .remember { gap: 12px; align-items: flex-start; }
 }

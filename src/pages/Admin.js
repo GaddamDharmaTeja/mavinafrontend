@@ -191,7 +191,7 @@ export function AdminDashboard() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [headerNotifications, setHeaderNotifications] = useState([]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const adminEmail = localStorage.getItem("admin_email") || "Administrator";
+  const adminEmail = typeof window !== "undefined" ? (window.localStorage.getItem("admin_email") || "Administrator") : "Administrator";
 
   const load = useCallback(async () => {
     try {
@@ -380,6 +380,9 @@ export function AdminDashboard() {
           className="signout"
           onClick={() => {
             localStorage.removeItem("admin_token");
+            localStorage.removeItem("admin_session");
+            localStorage.removeItem("admin_email");
+            window.dispatchEvent(new Event("admin-auth-changed"));
             nav("/admin/login");
           }}
         >

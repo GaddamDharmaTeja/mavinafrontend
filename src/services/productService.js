@@ -1,4 +1,7 @@
-const api = (process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080/api").replace(/\/$/, "");
+const runtimeOrigin = typeof window !== "undefined" && !/^localhost$|^127\.0\.0\.1$/.test(window.location.hostname)
+  ? "https://mavinabackend-1.onrender.com"
+  : "http://localhost:8080";
+const api = (process.env.NEXT_PUBLIC_API_BASE_URL || `${runtimeOrigin}/api`).replace(/\/$/, "");
 const asArray = value => Array.isArray(value) ? value : Array.isArray(value?.data) ? value.data : [];
 const storedToken = () => {
   if (typeof window === "undefined") return "";
@@ -8,7 +11,8 @@ const storedToken = () => {
 };
 export const assetUrl = value => {
   if (!value || /^https?:\/\//i.test(value) || value.startsWith("data:")) return value || "";
-  const origin = (process.env.NEXT_PUBLIC_API_ORIGIN || "").replace(/\/$/, "");
+  const configuredOrigin = process.env.NEXT_PUBLIC_API_ORIGIN || api.replace(/\/api\/?$/, "");
+  const origin = configuredOrigin.replace(/\/api\/?$/, "").replace(/\/$/, "");
   return `${origin}${value.startsWith("/") ? value : `/${value}`}`;
 };
 const normalizeProduct = product => ({ ...product, id: product.id || product._id, image: assetUrl(product.imageUrl || product.image || ""), weight: product.weight || "" });
@@ -90,4 +94,11 @@ export const archiveAdminRecord = (collection, id) => adminRequest(`/${collectio
 export const restoreAdminRecord = (collection, id) => adminRequest(`/${collection}/${id}/restore`, { method: "POST" });
 export const purgeAdminRecord = (collection, id) => adminRequest(`/${collection}/${id}`, { method: "DELETE" });
 export const archiveAdminProduct = id => archiveAdminRecord("products", id);
-export async function uploadAdminImage(file) { const body = new FormData(); body.append("file", file); return request("/uploads", { method: "POST", body }); }
+export async function uploadAdminImage(file, entityType = "GENERAL", entityId) {
+  const body = new FormData();
+  body.append("file", file);
+  body.append("entityType", entityType);
+  if (entityId) body.append("entityId", entityId);
+  return request("/uploads", { method: "POST", body });
+}
+
