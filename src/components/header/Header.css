@@ -1,7 +1,12 @@
+/* =========================================================
+   UTILITY BAR
+========================================================= */
+
 .utility-bar {
   background: var(--forest);
   color: #eef8e9;
   font-size: 12px;
+  overflow: hidden;
 }
 
 .utility-inner {
@@ -12,6 +17,8 @@
   display: flex;
   align-items: center;
   gap: 32px;
+  position: relative;
+  overflow: hidden;
 }
 
 .utility-inner span {
@@ -25,15 +32,109 @@
   color: #183026;
 }
 
+
+/* =========================================================
+   DELIVERY / MOVING TRUCK
+========================================================= */
+
+.delivery-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/*
+   Truck moves only forward.
+
+   It does NOT move backwards.
+
+   At the end:
+   - truck disappears
+   - position resets to start while invisible
+   - truck appears again
+*/
+
+.moving-truck {
+  display: inline-block;
+  transform: translateX(0);
+  transform-origin: center;
+  will-change: transform, opacity;
+
+  animation-name: truckDrive;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+
+/* =========================================================
+   DESKTOP TRUCK ANIMATION
+========================================================= */
+
+@keyframes truckDrive {
+
+  /* Start */
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* Move forward */
+  65% {
+    transform: translateX(560px);
+    opacity: 1;
+  }
+
+  /* Continue moving */
+  72% {
+    transform: translateX(620px);
+    opacity: 1;
+  }
+
+  /* Disappear */
+  75% {
+    transform: translateX(650px);
+    opacity: 0;
+  }
+
+  /*
+     Reset position while invisible.
+     Because opacity is 0, user will not see
+     the truck travelling backwards.
+  */
+  76% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+
+  /* Appear again */
+  82% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* Stay until next cycle */
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .utility-contact {
   margin-left: auto;
 }
 
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .header {
   height: 92px;
-  background: rgba(255, 255, 255, .94);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
+
   position: sticky;
   top: 0;
   z-index: 30;
@@ -44,6 +145,7 @@
   height: 100%;
   margin: auto;
   padding: 0 28px;
+
   display: flex;
   align-items: center;
 }
@@ -59,6 +161,11 @@
   display: block;
 }
 
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
 .container nav {
   flex: 1;
   display: flex;
@@ -68,8 +175,10 @@
 .nav-links {
   display: flex;
   list-style: none;
+
   margin: 0;
   padding: 0;
+
   gap: 30px;
   height: 92px;
 }
@@ -81,13 +190,21 @@
 
 .nav-links a {
   height: 100%;
+
   display: flex;
   align-items: center;
+
   text-decoration: none;
+
   color: #405047;
   font-size: 16px;
   font-weight: 700;
+
   border-bottom: 3px solid transparent;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .nav-links a.active,
@@ -95,6 +212,11 @@
   color: var(--leaf);
   border-bottom-color: var(--gold);
 }
+
+
+/* =========================================================
+   HEADER ICONS
+========================================================= */
 
 .header-icons {
   display: flex;
@@ -106,10 +228,14 @@
 .header-icons a {
   border: 0;
   background: none;
+
   font-size: 23px;
   color: #183526;
+
   cursor: pointer;
   padding: 10px;
+
+  transition: color 0.2s ease;
 }
 
 .header-icons a:hover,
@@ -117,63 +243,100 @@
   color: var(--leaf);
 }
 
+
+/* =========================================================
+   CART
+========================================================= */
+
 .cart-icon {
   position: relative;
+
   background: #eff7eb !important;
   border-radius: 14px !important;
 }
 
 .cart-icon b {
   position: absolute;
+
   right: 1px;
   top: 1px;
+
   width: 18px;
   height: 18px;
+
   border-radius: 50%;
+
   background: var(--gold);
   color: #163521;
+
   font: 700 11px/18px Arial;
+
   text-align: center;
 }
 
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
 .menu-toggle {
   display: none;
+
   border: 0;
   background: transparent;
+
   font-size: 26px;
+  color: #183526;
+
+  cursor: pointer;
 }
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
 
 .search-layer {
   position: fixed;
   inset: 0;
-  background: rgba(16, 63, 40, .35);
+
+  background: rgba(16, 63, 40, 0.35);
   backdrop-filter: blur(5px);
+
   z-index: 80;
+
   padding: 16vh 20px;
 }
 
 .search-layer form {
   max-width: 720px;
   margin: auto;
+
   background: #fff;
+
   border-radius: 22px;
   padding: 12px;
+
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, .25);
+
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
 }
 
 .search-layer form > svg {
   font-size: 24px;
   color: var(--leaf);
+
   margin-left: 10px;
 }
 
 .search-layer input {
   flex: 1;
+
   border: 0;
   outline: 0;
+
   font-size: 18px;
   padding: 14px 4px;
 }
@@ -181,19 +344,26 @@
 .search-layer form button {
   border: 0;
   background: transparent;
+
   color: var(--muted);
+
   padding: 10px;
+
   cursor: pointer;
 }
 
 .search-layer .search-submit {
   background: var(--forest);
   color: #fff;
+
   border-radius: 12px;
+
   padding: 12px 16px;
+
   display: flex;
   align-items: center;
   gap: 8px;
+
   font-weight: 700;
 }
 
@@ -201,12 +371,18 @@
   background: var(--leaf);
 }
 
+
+/* =========================================================
+   TABLET
+========================================================= */
+
 @media (max-width: 1050px) {
+
   .utility-inner {
     gap: 16px;
   }
 
-  .utility-inner span:nth-child(2),
+  /* Hide Bangalore delivery text */
   .utility-inner span:nth-child(3) {
     display: none;
   }
@@ -226,17 +402,171 @@
   .nav-links a {
     font-size: 14px;
   }
+
+
+  /* -------------------------------------------------------
+     TABLET TRUCK
+  ------------------------------------------------------- */
+
+  .moving-truck {
+    animation-name: truckDriveTablet;
+    animation-duration: 20s;
+  }
+
+  @keyframes truckDriveTablet {
+
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    62% {
+      transform: translateX(300px);
+      opacity: 1;
+    }
+
+    70% {
+      transform: translateX(350px);
+      opacity: 1;
+    }
+
+    74% {
+      transform: translateX(380px);
+      opacity: 0;
+    }
+
+    /* Invisible reset */
+    75% {
+      transform: translateX(-15px);
+      opacity: 0;
+    }
+
+    /* Appear again */
+    82% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 }
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media (max-width: 700px) {
-  .utility-inner {
-    justify-content: center;
+
+  /* -------------------------------------------------------
+     UTILITY BAR
+  ------------------------------------------------------- */
+
+  .utility-bar {
     height: 30px;
   }
 
+  .utility-inner {
+    justify-content: center;
+
+    height: 30px;
+
+    padding: 0 12px;
+
+    gap: 18px;
+
+    overflow: hidden;
+  }
+
+  /*
+     Hide:
+     - Bangalore delivery
+     - Customer care
+  */
+
+  .utility-inner span:nth-child(3),
   .utility-contact {
     display: none;
   }
+
+  .utility-inner span {
+    font-size: 10px;
+  }
+
+  .utility-inner span:first-child {
+    display: flex;
+  }
+
+  .utility-inner span:nth-child(2) {
+    display: flex;
+  }
+
+  .delivery-item {
+    gap: 5px;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE TRUCK
+  ------------------------------------------------------- */
+
+  .moving-truck {
+    animation-name: truckDriveMobile;
+    animation-duration: 15s;
+  }
+
+  @keyframes truckDriveMobile {
+
+    /* Start */
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* Move right */
+    55% {
+      transform: translateX(75px);
+      opacity: 1;
+    }
+
+    /* Move further */
+    65% {
+      transform: translateX(105px);
+      opacity: 1;
+    }
+
+    /* Disappear */
+    70% {
+      transform: translateX(125px);
+      opacity: 0;
+    }
+
+    /* Invisible reset */
+    71% {
+      transform: translateX(-15px);
+      opacity: 0;
+    }
+
+    /* Appear again */
+    78% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* Stay */
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     HEADER
+  ------------------------------------------------------- */
 
   .header {
     height: 72px;
@@ -255,18 +585,30 @@
     width: 165px;
   }
 
+
+  /* -------------------------------------------------------
+     MOBILE MENU
+  ------------------------------------------------------- */
+
   .menu-toggle {
     display: block;
+
     margin-left: auto;
+
     order: 2;
   }
 
   .container nav {
     display: none;
+
     order: 4;
+
     width: 100%;
+
     background: #fff;
+
     border-top: 1px solid var(--line);
+
     box-shadow: var(--shadow);
   }
 
@@ -276,27 +618,39 @@
 
   .nav-links {
     height: auto;
+
     flex-direction: column;
+
     gap: 0;
+
     padding: 8px 16px;
   }
 
   .nav-links a {
     height: 42px;
+
     font-size: 15px;
   }
 
+
+  /* -------------------------------------------------------
+     MOBILE HEADER ICONS
+  ------------------------------------------------------- */
+
   .header-icons {
     order: 3;
+
     gap: 2px;
   }
 
   .header-icons button,
   .header-icons a {
     font-size: 19px;
+
     padding: 7px;
   }
 
+  /* Hide wishlist on mobile */
   .header-icons a:nth-child(2) {
     display: none;
   }
@@ -304,9 +658,15 @@
   .cart-icon b {
     width: 15px;
     height: 15px;
+
     font-size: 9px;
     line-height: 15px;
   }
+
+
+  /* -------------------------------------------------------
+     MOBILE SEARCH
+  ------------------------------------------------------- */
 
   .search-layer {
     padding: 8vh 12px;
@@ -314,16 +674,67 @@
 
   .search-layer form {
     border-radius: 16px;
+
     flex-wrap: wrap;
   }
 
   .search-layer input {
     min-width: 0;
+
     font-size: 16px;
   }
 
   .search-layer .search-submit {
     width: 100%;
+
     justify-content: center;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .utility-inner {
+    gap: 10px;
+    padding: 0 8px;
+  }
+
+  .utility-inner span {
+    font-size: 9px;
+  }
+
+  .logo-img {
+    width: 145px;
+  }
+
+  .header-icons button,
+  .header-icons a {
+    font-size: 18px;
+    padding: 6px;
+  }
+
+  .menu-toggle {
+    font-size: 24px;
+  }
+
+  .moving-truck {
+    animation-duration: 20s;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .moving-truck {
+    animation: none;
+    transform: none;
   }
 }
