@@ -188,6 +188,7 @@ function Home() {
 
           <div className="home-variant-grid">
             {varieties.map((product, index) => (
+              console.log("Rendering product:", product),
               <article
                 key={product.id}
                 className={`home-variant ${
@@ -222,7 +223,7 @@ function Home() {
           )}
         </section>
 
-        <section className="home-section selected">
+        {/* <section className="home-section selected">
           <div className="reveal-center">
             <p className="section-kicker">— ◇ —</p>
             <h2>Selected Products</h2>
@@ -287,7 +288,7 @@ function Home() {
           {!selected.length && (
             <p className="empty-products">Products are loaded from the API.</p>
           )}
-        </section>
+        </section> */}
 
         <section className="delivery-banner">
           <img
