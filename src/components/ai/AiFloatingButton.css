@@ -1595,6 +1595,72 @@
 }
 
 
+
+/* =========================================================
+   OUT OF STOCK - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .ai-out-of-stock {
+    padding: 6px 9px;
+    border-radius: 7px;
+    font-size: 9px;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .ai-out-of-stock {
+    padding: 5px 7px;
+    border-radius: 6px;
+    font-size: 8px;
+  }
+
+}
+
+@media (max-width: 320px) {
+
+  .ai-chat-window {
+    right: 4px;
+    left: 4px;
+  }
+
+  .ai-chat-body {
+    padding: 12px;
+  }
+
+  .ai-product-card {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .ai-product-image-wrapper {
+    width: 56px;
+    height: 56px;
+  }
+
+  .ai-product-details h5 {
+    font-size: 9px;
+  }
+
+  .ai-product-bottom strong {
+    font-size: 11px;
+  }
+
+  .ai-add-cart-button {
+    padding: 5px 6px;
+    font-size: 8px;
+  }
+
+  .ai-out-of-stock {
+    padding: 5px 6px;
+    font-size: 8px;
+  }
+
+}
+
 /* =========================================================
    ACCESSIBILITY
 ========================================================= */
