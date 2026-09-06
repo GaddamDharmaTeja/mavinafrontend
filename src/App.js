@@ -19,6 +19,7 @@ import Farms from "./pages/Farms";
 import "./App.css";
 import "./responsive-foundation.css";
 import ScrollReveal from "./components/ScrollReveal";
+import AiFloatingButton from "./components/ai/AiFloatingButton";
 
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 
@@ -84,6 +85,7 @@ function App() {
               }
             />
           </Routes>
+           <AiFloatingButton />
         </Suspense>
       </BrowserRouter>
     </ShopProvider>
