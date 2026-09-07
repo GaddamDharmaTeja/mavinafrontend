@@ -192,6 +192,11 @@ export function AdminDashboard() {
   const [headerNotifications, setHeaderNotifications] = useState([]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.toggle("mobile-menu-open", mobileSidebarOpen);
+    return () => document.body.classList.remove("mobile-menu-open");
+  }, [mobileSidebarOpen]);
   const adminEmail = typeof window !== "undefined" ? (window.localStorage.getItem("admin_email") || "Administrator") : "Administrator";
 
   const load = useCallback(async () => {

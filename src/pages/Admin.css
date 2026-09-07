@@ -932,11 +932,11 @@ color:#ce2c2c}
 .admin-sidebar-backdrop { display: none; }
 @media (max-width: 720px) {
   .admin-app { position: relative; }
-  .admin-sidebar { position: fixed !important; inset: 0 auto 0 0; width: min(300px, 86vw) !important; height: 100dvh !important; margin: 0 !important; border-radius: 0 22px 22px 0 !important; transform: translateX(-105%); transition: transform .25s ease; z-index: 80; box-shadow: 18px 0 44px rgba(9,42,25,.28); }
+  .admin-sidebar { position: fixed !important; inset: 0 auto 0 0; width: min(300px, 86vw) !important; height: 100dvh !important; max-height: 100dvh !important; margin: 0 !important; border-radius: 0 22px 22px 0 !important; transform: translateX(-105%); transition: transform .25s ease; z-index: 80; box-shadow: 18px 0 44px rgba(9,42,25,.28); overflow: hidden !important; }
   .mobile-sidebar-open .admin-sidebar { transform: translateX(0); }
   .admin-sidebar-backdrop { display: block; position: fixed; inset: 0; z-index: 70; border: 0; background: rgba(8,32,20,.42); cursor: pointer; }
-  .admin-sidebar nav { display: grid !important; overflow-y: auto !important; overflow-x: hidden !important; }
+  .admin-sidebar nav { display: grid !important; flex: 1 1 0; min-height: 0; height: calc(100dvh - 170px); max-height: calc(100dvh - 170px); overflow-y: scroll !important; overflow-x: hidden !important; padding: 0 0 12px; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y; scrollbar-width: thin; }
   .admin-sidebar nav button { width: 100% !important; min-height: 46px !important; }
-  .admin-sidebar .signout { display: flex !important; }
+  .admin-sidebar .signout { display: flex !important; flex: 0 0 auto; }
   .admin-topbar { position: sticky; top: 0; z-index: 50; }
 }
