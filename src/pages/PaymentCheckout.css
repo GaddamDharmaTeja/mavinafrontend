@@ -1,6 +1,7 @@
 /* =========================
    PAYMENT / CHECKOUT PAGE
 ========================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 .payment-page {
   max-width: 1180px;
@@ -29,10 +30,16 @@
 }
 
 .payment-heading h1 {
-  font: 700 48px Georgia, serif;
-  color: #104a1e;
   margin: 9px 0;
-  letter-spacing: -0.03em;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.05;
+
+  letter-spacing: -0.02em;
+
+  color: #104a1e;
 }
 
 .payment-heading span {
@@ -88,10 +95,16 @@
 }
 
 .checkout-step h2 {
-  font-size: 19px;
+  margin: 1px 0 5px;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.15;
+
+  letter-spacing: -0.2px;
+
   color: #174d22;
-  margin: 1px 0 4px;
-  font-weight: 700;
 }
 
 .checkout-step p {
@@ -332,10 +345,14 @@
 }
 
 .summary-top h2 {
-  font-size: 19px;
-  color: #174d22;
   margin: 5px 0 0;
-  font-weight: 700;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.15;
+
+  color: #174d22;
 }
 
 /* =========================
@@ -363,6 +380,26 @@
   min-width: 0;
   color: #26382b;
   line-height: 1.3;
+}
+.payment-summary article > span {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
+
+  color: #26382b;
+}
+.payment-summary article > span small {
+  display: block;
+
+  margin-top: 4px;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+
+  color: #6b766c;
 }
 
 .payment-summary article small {
@@ -540,12 +577,13 @@
   background: #084515;
   transform: translateY(-1px);
 }
+
 .payment-step h2 {
-  font-family: "DM Serif Display", Georgia, serif;
-  font-size: 27px;
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.3px;
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
   color: #173d29;
 }
 
