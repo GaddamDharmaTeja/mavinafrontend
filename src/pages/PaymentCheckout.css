@@ -540,7 +540,22 @@
   background: #084515;
   transform: translateY(-1px);
 }
+.payment-step h2 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.3px;
+  color: #173d29;
+}
 
+.payment-step p {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #687a68;
+}
 /* =========================
    TABLET
 ========================= */
@@ -634,6 +649,14 @@
     flex-direction: column;
     gap: 8px;
   }
+   .payment-step h2 {
+    font-size: 23px;
+  }
+
+  .payment-step p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
 }
 
 /* =========================
@@ -671,5 +694,13 @@
 
   .summary-pin strong {
     font-size: 14px;
+  }
+
+   .payment-step h2 {
+    font-size: 21px;
+  }
+
+  .payment-step p {
+    font-size: 12px;
   }
 }

@@ -299,10 +299,10 @@ function Home() {
 
           <div className="reveal-center">
             <h2>
-              Taste Nature’s Best
-              <br />
-              Delivered <em>Fresh to You!</em>
+              Taste  Nature’s  Best
+              <br />        
             </h2>
+            <h2> Delivered <em>Fresh to You!</em></h2>
             <p>From our orchards to your home.</p>
           </div>
 

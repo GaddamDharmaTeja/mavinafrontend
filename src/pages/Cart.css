@@ -1,6 +1,8 @@
 /* =========================================================
    CART PAGE
 ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
 
 .cart-page {
   max-width: 1180px;
@@ -141,13 +143,26 @@
   min-width: 0;
 }
 
-.cart-product-info h2 {
+/* .cart-product-info h2 {
   margin: 0 0 5px;
 
   font-family: "Playfair Display", Georgia, serif;
   font-size: 19px;
   line-height: 1.25;
   font-weight: 700;
+
+  color: #193725;
+} */
+
+.cart-product-info h2 {
+  margin: 0 0 5px;
+
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 400;
+
+  letter-spacing: -0.2px;
 
   color: #193725;
 }
@@ -368,7 +383,7 @@
    SUMMARY HEADING
 ========================================================= */
 
-.order-summary h2 {
+/* .order-summary h2 {
   margin: 0 0 22px;
 
   font-family: "Playfair Display", Georgia, serif;
@@ -376,8 +391,20 @@
   font-weight: 800;
 
   color: #173d29;
-}
+} */
 
+.order-summary h2 {
+  margin: 0 0 22px;
+
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+
+  color: #173d29;
+}
 /* =========================================================
    SUMMARY ROWS
 ========================================================= */
@@ -939,4 +966,21 @@
   .cart-trust {
     gap: 4px;
   }
+}
+
+@media (max-width: 700px) {
+
+  .cart-product-info h2 {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  .order-summary h2 {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 25px;
+    font-weight: 400;
+  }
+
 }

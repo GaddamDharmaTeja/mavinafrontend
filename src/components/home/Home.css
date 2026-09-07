@@ -1,6 +1,8 @@
 /* =========================================
    HOME HERO
    ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
 
 .home-hero {
   min-height: 490px;
@@ -49,12 +51,17 @@
   margin: 0;
 }
 
+/* .home-copy em,
+.delivery-banner em {
+  font-style: normal;
+  color: #ffca43;
+} */
+
 .home-copy em,
 .delivery-banner em {
   font-style: normal;
   color: #ffca43;
 }
-
 .home-copy p {
   font: 600 17px / 1.55
     'Playfair Display',
@@ -882,8 +889,23 @@
   flex: 1;
 }
 
-.delivery-banner h2 {
+/* .delivery-banner h2 {
   font-size: 25px;
+} */
+.delivery-banner h2 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.5px;
+
+  color: #ffffff;
 }
 
 .delivery-banner p {
