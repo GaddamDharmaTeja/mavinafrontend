@@ -738,3 +738,19 @@
     transform: none;
   }
 }
+
+/* Final mobile overrides: keep the menu in a full-width second row. */
+@media (max-width: 700px) {
+  .header { overflow: visible; }
+  .header .container { position: relative; flex-wrap: wrap; height: auto; min-height: 72px; }
+  .header .container nav { flex: 0 0 100%; width: 100%; max-width: 100%; position: absolute; top: 100%; left: 0; right: 0; order: 4; z-index: 29; }
+  .header .nav-links { width: 100%; padding: 8px 14px 12px; }
+  .header .nav-links li, .header .nav-links a { width: 100%; min-height: 44px; }
+  .header .nav-links a { padding: 0 8px; }
+  .header-icons { margin-left: auto; min-width: 0; }
+}
+@media (max-width: 400px) {
+  .header .container { padding-left: 10px; padding-right: 10px; }
+  .header .logo-img { width: 138px; }
+  .header .header-icons button, .header .header-icons a { min-width: 32px; padding: 5px; font-size: 17px; }
+}

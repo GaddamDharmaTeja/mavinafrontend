@@ -54,6 +54,12 @@ export default function Header({ cartCount = 0 }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (typeof document === "undefined") return undefined;
+    document.body.classList.toggle("mobile-menu-open", open);
+    return () => document.body.classList.remove("mobile-menu-open");
+  }, [open]);
+
   const closeMenu = () => {
     setOpen(false);
   };

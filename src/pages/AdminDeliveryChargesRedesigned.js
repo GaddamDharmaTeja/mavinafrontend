@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FiAlertCircle, FiCheck, FiEdit2, FiPlus, FiRefreshCw, FiTrash2, FiX } from "react-icons/fi";
 import { deleteDeliveryCharge, getDeliveryCharges, saveDeliveryCharge } from "../services/productService";
 import "./AdminDeliveryCharges.css";
+import "./AdminDeliveryChargesResponsive.css";
 
 const emptySlab = type => ({ type, minValue: "", maxValue: "", charge: "", active: true });
 

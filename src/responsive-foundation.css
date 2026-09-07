@@ -93,3 +93,62 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   }
   .admin-login-screen .remember { gap: 12px; align-items: flex-start; }
 }
+
+/* Last-loaded safety net for narrow screens. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+body.mobile-menu-open { overflow: hidden; }
+img, video, canvas, iframe { max-width: 100%; }
+main, section, article, form, table, .container, .admin-content, .admin-page { min-width: 0; max-width: 100%; }
+input, select, textarea, button { max-width: 100%; }
+@media (max-width: 760px) {
+  .home-main, .shop-page, .page-shell, .content-page, .profile-page, .checkout-page { width: 100%; padding-left: 14px; padding-right: 14px; }
+  .home-hero-inner { width: 100%; min-width: 0; }
+  .home-copy h1 { font-size: clamp(38px, 11vw, 52px); line-height: .98; }
+  .home-actions { flex-wrap: wrap; }
+  .home-actions button { min-height: 46px; }
+  .delivery-banner { flex-wrap: wrap; }
+  .delivery-banner > div { min-width: 0; }
+}
+@media (max-width: 480px) {
+  .home-actions button { width: 100%; justify-content: center; }
+  .home-promises { grid-template-columns: 1fr !important; }
+  .home-promises article { margin-top: 0 !important; }
+  .home-variant-grid, .home-product-grid { grid-template-columns: 1fr !important; }
+  .admin-page { padding: 12px !important; }
+  .admin-topbar { gap: 6px; }
+  .admin-topbar > div:first-of-type { min-width: 0; overflow: hidden; }
+  .admin-topbar h1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .admin-table-card { overflow-x: auto; }
+  .admin-table-card table { min-width: 620px; }
+  .modal-wrap { padding: 10px !important; align-items: end !important; }
+  .product-form { width: 100% !important; max-height: 92dvh; overflow-y: auto; border-radius: 20px 20px 0 0 !important; }
+}
+
+/* Shared route-level layouts that historically used desktop grids. */
+@media (max-width: 760px) {
+  .shop-benefits { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; margin-left: 12px; margin-right: 12px; }
+  .shop-content { grid-template-columns: 1fr !important; padding-left: 14px; padding-right: 14px; }
+  .shop-sidebar { display: none; }
+  .two-column, .account-layout, .farm-hero, .policy { grid-template-columns: 1fr !important; }
+  .metric-grid, .simple-product-grid, .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .product-layout { grid-template-columns: 1fr !important; }
+  .newsletter-container { display: block; }
+  .newsletter-form { min-width: 0; margin-top: 18px; }
+  .form-grid { grid-template-columns: 1fr !important; }
+  .form-grid .full { grid-column: auto; }
+  .track-panel form { display: grid; }
+}
+@media (max-width: 480px) {
+  .shop-benefits, .metric-grid, .simple-product-grid, .blog-grid, .gallery-row { grid-template-columns: 1fr !important; }
+  .shop-benefits article { border: 0; }
+  .shop-toolbar { display: grid; gap: 10px; align-items: stretch; }
+  .shop-toolbar label { width: 100%; }
+  .shop-promotions { grid-template-columns: 1fr !important; }
+  .orders-page, .screen, .content-page, .product-details { padding-left: 14px !important; padding-right: 14px !important; }
+  .customer-order-card > header, .customer-order-card > footer { align-items: flex-start; flex-direction: column; }
+  .detail-actions { flex-direction: column; }
+  .detail-actions button { width: 100%; }
+  .newsletter-form { display: grid; grid-template-columns: 1fr; }
+  .newsletter-form input, .newsletter-form button { width: 100%; border-radius: 8px; }
+}

@@ -191,6 +191,7 @@ export function AdminDashboard() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [headerNotifications, setHeaderNotifications] = useState([]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const adminEmail = typeof window !== "undefined" ? (window.localStorage.getItem("admin_email") || "Administrator") : "Administrator";
 
   const load = useCallback(async () => {
@@ -350,7 +351,8 @@ export function AdminDashboard() {
     );
 
   return (
-    <main className={`admin-app ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}>
+    <main className={`admin-app ${sidebarCollapsed ? "sidebar-collapsed" : ""} ${mobileSidebarOpen ? "mobile-sidebar-open" : ""}`}>
+      {mobileSidebarOpen && <button className="admin-sidebar-backdrop" aria-label="Close navigation" onClick={() => setMobileSidebarOpen(false)} />}
       <aside className="admin-sidebar">
         <div className="side-brand">
           <i>◆</i>
@@ -367,6 +369,7 @@ export function AdminDashboard() {
               onClick={() => {
                 setTab(name);
                 setEditing(null);
+                setMobileSidebarOpen(false);
               }}
               key={name}
             >
@@ -383,6 +386,7 @@ export function AdminDashboard() {
             localStorage.removeItem("admin_session");
             localStorage.removeItem("admin_email");
             window.dispatchEvent(new Event("admin-auth-changed"));
+            setMobileSidebarOpen(false);
             nav("/admin/login");
           }}
         >
@@ -393,7 +397,7 @@ export function AdminDashboard() {
 
       <section className="admin-content">
         <header className="admin-topbar">
-          <button className="sidebar-toggle" onClick={() => setSidebarCollapsed((value) => !value)} aria-label="Toggle navigation">
+          <button className="sidebar-toggle" onClick={() => window.matchMedia("(max-width: 720px)").matches ? setMobileSidebarOpen(true) : setSidebarCollapsed((value) => !value)} aria-label="Toggle navigation">
             <FiMenu />
           </button>
           <div>
@@ -955,7 +959,7 @@ function Orders({ orders, update, archive, purge }) {
                   <select
                     value={o.status}
                     onChange={(e) =>
-                      update(o.id, {
+                      update(o.orderNumber, {
                         status: e.target.value,
                         courier: o.courier || "",
                         trackingNumber: o.trackingNumber || "",
@@ -975,7 +979,7 @@ function Orders({ orders, update, archive, purge }) {
                     placeholder="Tracking number"
                     defaultValue={o.trackingNumber || ""}
                     onBlur={(e) =>
-                      update(o.id, {
+                      update(o.orderNumber, {
                         courier: o.courier || "",
                         trackingNumber: e.target.value,
                       })

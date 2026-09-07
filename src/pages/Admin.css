@@ -901,3 +901,42 @@ color:#ce2c2c}
   min-width:650px}
 
 }
+
+/* Final admin mobile layout rules. */
+@media (max-width: 720px) {
+  .admin-app { display: block; width: 100%; min-width: 0; }
+  .admin-sidebar { width: 100%; max-width: 100%; overflow: hidden; }
+  .admin-sidebar nav { width: 100%; max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+  .admin-sidebar nav button { flex: 0 0 auto; width: auto !important; }
+  .admin-content { width: 100%; min-width: 0; }
+  .admin-topbar { width: 100%; min-width: 0; overflow: hidden; }
+  .top-actions { flex: 0 0 auto; }
+  .admin-page { width: 100%; min-width: 0; overflow-x: hidden; }
+  .stat-row, .analytics-row, .tables-row, .split-page, .settings-layout, .form-columns { grid-template-columns: 1fr !important; }
+  .analytics-row > .dash-panel:last-child { grid-column: auto; }
+  .admin-table-card { width: 100%; overflow-x: auto; }
+  .admin-table-card table { min-width: 620px; }
+}
+@media (max-width: 480px) {
+  .admin-sidebar { position: relative; }
+  .side-brand { padding: 14px 12px 18px; }
+  .admin-sidebar .signout { display: flex !important; }
+  .admin-topbar { height: 64px; padding: 0 10px !important; }
+  .admin-topbar h1 { max-width: 140px; font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .header-icon-button { width: 34px !important; height: 34px !important; }
+  .account-trigger { min-width: 38px !important; width: 38px !important; }
+  .admin-page { padding: 12px !important; }
+}
+
+/* Mobile admin drawer: navigation no longer clips horizontally at phone widths. */
+.admin-sidebar-backdrop { display: none; }
+@media (max-width: 720px) {
+  .admin-app { position: relative; }
+  .admin-sidebar { position: fixed !important; inset: 0 auto 0 0; width: min(300px, 86vw) !important; height: 100dvh !important; margin: 0 !important; border-radius: 0 22px 22px 0 !important; transform: translateX(-105%); transition: transform .25s ease; z-index: 80; box-shadow: 18px 0 44px rgba(9,42,25,.28); }
+  .mobile-sidebar-open .admin-sidebar { transform: translateX(0); }
+  .admin-sidebar-backdrop { display: block; position: fixed; inset: 0; z-index: 70; border: 0; background: rgba(8,32,20,.42); cursor: pointer; }
+  .admin-sidebar nav { display: grid !important; overflow-y: auto !important; overflow-x: hidden !important; }
+  .admin-sidebar nav button { width: 100% !important; min-height: 46px !important; }
+  .admin-sidebar .signout { display: flex !important; }
+  .admin-topbar { position: sticky; top: 0; z-index: 50; }
+}
