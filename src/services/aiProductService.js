@@ -1,25 +1,13 @@
-const runtimeOrigin = typeof window !== "undefined" && !/^localhost$|^127\.0\.0\.1$/.test(window.location.hostname)
-  ? "https://mavinabackend-1.onrender.com"
-  : "http://localhost:8080";
-const api = (process.env.NEXT_PUBLIC_API_BASE_URL || `${runtimeOrigin}/api`).replace(/\/$/, "");
-
-
-const PRODUCT_API_URL = `${api}/products`;
+import { getProducts } from "./productService";
 
 export const getProductsForAI = async () => {
   try {
-    const response = await fetch(PRODUCT_API_URL);
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch products");
-    }
-
-    const products = await response.json();
-
-    return products;
-  } catch (error) {
-    console.error("AI product API error:", error);
-
+    // Keep the optional assistant on the same API origin, auth handling, and
+    // response normalization as the rest of the storefront. Product data is
+    // enrichment for AI only, so a sleeping/unavailable API must not break the
+    // page or trigger a browser console error overlay.
+    return await getProducts();
+  } catch {
     return [];
   }
 };

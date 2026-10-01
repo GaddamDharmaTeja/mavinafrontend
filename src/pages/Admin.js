@@ -197,20 +197,25 @@ export function AdminDashboard() {
     document.body.classList.toggle("mobile-menu-open", mobileSidebarOpen);
     return () => document.body.classList.remove("mobile-menu-open");
   }, [mobileSidebarOpen]);
-  const adminEmail = typeof window !== "undefined" ? (window.localStorage.getItem("admin_email") || "Administrator") : "Administrator";
+
+  const adminEmail =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("admin_email") || "Administrator"
+      : "Administrator";
 
   const load = useCallback(async () => {
     try {
-      const [products, categories, orders, dashboard, customers, farms, applications, zones] = await Promise.all([
-        getAdminProducts(),
-        getAdminCategories(),
-        getAdminOrders(),
-        getAdminDashboard(),
-        getAdminCustomers(),
-        getAdminFarms(),
-        getSellerApplications(),
-        getDeliveryZones(),
-      ]);
+      const [products, categories, orders, dashboard, customers, farms, applications, zones] =
+        await Promise.all([
+          getAdminProducts(),
+          getAdminCategories(),
+          getAdminOrders(),
+          getAdminDashboard(),
+          getAdminCustomers(),
+          getAdminFarms(),
+          getSellerApplications(),
+          getDeliveryZones(),
+        ]);
       setData({ products, categories, orders, dashboard, customers, farms, applications, zones });
     } catch {
       localStorage.removeItem("admin_session");
@@ -290,13 +295,38 @@ export function AdminDashboard() {
           setNotice("Order updated successfully.");
           load();
         }}
-        archive={async (id) => { await archiveAdminRecord("orders", id); setNotice("Order archived."); load(); }}
-        purge={async (id) => { await purgeAdminRecord("orders", id); setNotice("Order permanently deleted."); load(); }}
+        archive={async (id) => {
+          await archiveAdminRecord("orders", id);
+          setNotice("Order archived.");
+          load();
+        }}
+        purge={async (id) => {
+          await purgeAdminRecord("orders", id);
+          setNotice("Order permanently deleted.");
+          load();
+        }}
       />
     ) : tab === "Customers" ? (
       <Customers customers={data.customers} />
     ) : tab === "Data & Storage" ? (
-      <DataStorage data={data} archive={async (collection, id) => { await archiveAdminRecord(collection, id); setNotice("Record archived."); load(); }} restore={async (collection, id) => { await restoreAdminRecord(collection, id); setNotice("Record restored."); load(); }} purge={async (collection, id) => { await purgeAdminRecord(collection, id); setNotice("Record permanently deleted."); load(); }} />
+      <DataStorage
+        data={data}
+        archive={async (collection, id) => {
+          await archiveAdminRecord(collection, id);
+          setNotice("Record archived.");
+          load();
+        }}
+        restore={async (collection, id) => {
+          await restoreAdminRecord(collection, id);
+          setNotice("Record restored.");
+          load();
+        }}
+        purge={async (collection, id) => {
+          await purgeAdminRecord(collection, id);
+          setNotice("Record permanently deleted.");
+          load();
+        }}
+      />
     ) : tab === "Farms" ? (
       <FarmsPanel
         farms={data.farms}
@@ -356,8 +386,19 @@ export function AdminDashboard() {
     );
 
   return (
-    <main className={`admin-app ${sidebarCollapsed ? "sidebar-collapsed" : ""} ${mobileSidebarOpen ? "mobile-sidebar-open" : ""}`}>
-      {mobileSidebarOpen && <button className="admin-sidebar-backdrop" aria-label="Close navigation" onClick={() => setMobileSidebarOpen(false)} />}
+    <main
+      className={`admin-app ${sidebarCollapsed ? "sidebar-collapsed" : ""} ${
+        mobileSidebarOpen ? "mobile-sidebar-open" : ""
+      }`}
+    >
+      {mobileSidebarOpen && (
+        <button
+          className="admin-sidebar-backdrop"
+          aria-label="Close navigation"
+          onClick={() => setMobileSidebarOpen(false)}
+        />
+      )}
+
       <aside className="admin-sidebar">
         <div className="side-brand">
           <i>◆</i>
@@ -402,7 +443,15 @@ export function AdminDashboard() {
 
       <section className="admin-content">
         <header className="admin-topbar">
-          <button className="sidebar-toggle" onClick={() => window.matchMedia("(max-width: 720px)").matches ? setMobileSidebarOpen(true) : setSidebarCollapsed((value) => !value)} aria-label="Toggle navigation">
+          <button
+            className="sidebar-toggle"
+            onClick={() =>
+              window.matchMedia("(max-width: 720px)").matches
+                ? setMobileSidebarOpen(true)
+                : setSidebarCollapsed((value) => !value)
+            }
+            aria-label="Toggle navigation"
+          >
             <FiMenu />
           </button>
           <div>
@@ -414,19 +463,31 @@ export function AdminDashboard() {
             <input placeholder="Search anything..." />
           </label>
           <div className="top-actions">
-            <button className="header-icon-button" onClick={() => setNotificationsOpen((open) => !open)} aria-label="Open notifications">
+            <button
+              className="header-icon-button"
+              onClick={() => setNotificationsOpen((open) => !open)}
+              aria-label="Open notifications"
+            >
               <FiBell />
               {headerNotifications.filter((item) => !item.read).length > 0 && (
                 <b>{headerNotifications.filter((item) => !item.read).length}</b>
               )}
             </button>
 
-            <button className="header-icon-button" onClick={() => setTab("Notifications")} aria-label="Open notification inbox">
+            <button
+              className="header-icon-button"
+              onClick={() => setTab("Notifications")}
+              aria-label="Open notification inbox"
+            >
               <FiMail />
             </button>
 
             <div className="account-control">
-              <button className="account-trigger" onClick={() => setAccountOpen((open) => !open)} aria-expanded={accountOpen}>
+              <button
+                className="account-trigger"
+                onClick={() => setAccountOpen((open) => !open)}
+                aria-expanded={accountOpen}
+              >
                 <div className="avatar">{adminEmail.charAt(0).toUpperCase()}</div>
                 <span>
                   <b>{adminEmail}</b>
@@ -466,7 +527,9 @@ export function AdminDashboard() {
                         if (!item.read) {
                           await markNotificationRead(item.id);
                           setHeaderNotifications(
-                            headerNotifications.map((value) => (value.id === item.id ? { ...value, read: true } : value))
+                            headerNotifications.map((value) =>
+                              value.id === item.id ? { ...value, read: true } : value
+                            )
                           );
                         }
                       }}
@@ -704,7 +767,9 @@ function Products({ products, farms, editing, setEditing, save, upload, archive 
                 <td>₹{p.price}</td>
                 <td>{p.stockQuantity}</td>
                 <td>
-                  <span className={p.active ? "active-tag" : "inactive-tag"}>{p.active ? "Active" : "Inactive"}</span>
+                  <span className={p.active ? "active-tag" : "inactive-tag"}>
+                    {p.active ? "Active" : "Inactive"}
+                  </span>
                 </td>
                 <td>
                   <button className="icon-btn" onClick={() => setEditing(p)}>
@@ -720,7 +785,9 @@ function Products({ products, farms, editing, setEditing, save, upload, archive 
         </table>
       </section>
 
-      {editing && <ProductForm item={editing} farms={farms} setItem={setEditing} save={save} upload={upload} />}
+      {editing && (
+        <ProductForm item={editing} farms={farms} setItem={setEditing} save={save} upload={upload} />
+      )}
     </>
   );
 }
@@ -764,7 +831,10 @@ function ProductForm({ item, farms, setItem, save, upload }) {
 
               <label>
                 Farm owner
-                <select value={item.farmId || ""} onChange={(e) => setItem({ ...item, farmId: e.target.value })}>
+                <select
+                  value={item.farmId || ""}
+                  onChange={(e) => setItem({ ...item, farmId: e.target.value })}
+                >
                   <option value="">Central orchard / unassigned</option>
                   {farms.map((farm) => (
                     <option key={farm.id} value={farm.id}>
@@ -812,7 +882,9 @@ function ProductForm({ item, farms, setItem, save, upload }) {
               <input type="file" accept="image/jpeg,image/png,image/webp" onChange={upload} />
             </label>
 
-            {item.imageUrl && <img className="upload-preview" src={assetUrl(item.imageUrl)} alt="Preview" />}
+            {item.imageUrl && (
+              <img className="upload-preview" src={assetUrl(item.imageUrl)} alt="Preview" />
+            )}
 
             <label className="toggle">
               <input
@@ -832,6 +904,102 @@ function ProductForm({ item, farms, setItem, save, upload }) {
           <button className="green">Save Product</button>
         </footer>
       </form>
+    </div>
+  );
+}
+function ConfirmModal({
+  open,
+  title,
+  message,
+  confirmText = "Confirm",
+  onConfirm,
+  onCancel,
+  danger = false,
+  order,
+}) {
+  if (!open) return null;
+
+  return (
+    <div className="confirm-overlay" onClick={onCancel}>
+      <div
+        className="confirm-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="confirm-close" onClick={onCancel}>
+          ×
+        </button>
+
+        <div className={`confirm-icon ${danger ? "danger" : ""}`}>
+          {danger ? "🗑" : "!"}
+        </div>
+
+        <h2>{title}</h2>
+
+        <p className="confirm-message">
+          {message}
+        </p>
+
+        {order && (
+          <div className="confirm-record">
+            <div className="confirm-record-icon">📦</div>
+
+            <div>
+              <small>Order Number</small>
+              <b>#{order.orderNumber}</b>
+            </div>
+
+            <div>
+              <small>Customer</small>
+              <b>{order.customerName}</b>
+            </div>
+
+            <div>
+              <small>Date</small>
+              <b>
+                {new Date(order.createdAt).toLocaleDateString()}
+              </b>
+            </div>
+
+            <div>
+              <small>Amount</small>
+              <b>₹{order.total}</b>
+            </div>
+          </div>
+        )}
+
+        {danger && (
+          <div className="confirm-warning">
+            <span>ⓘ</span>
+
+            <div>
+              <b>This action cannot be undone.</b>
+              <small>
+                The selected record and its associated data
+                will be permanently removed.
+              </small>
+            </div>
+          </div>
+        )}
+
+        <div className="confirm-actions">
+          <button
+            className="confirm-cancel"
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+
+          <button
+            className={`confirm-submit ${
+              danger ? "danger-button" : ""
+            }`}
+            onClick={onConfirm}
+          >
+            {danger && "🗑 "}
+            {confirmText}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -908,12 +1076,19 @@ function Categories({ categories, save }) {
 
         <label>
           Slug
-          <input value={item.slug} onChange={(e) => setItem({ ...item, slug: e.target.value })} required />
+          <input
+            value={item.slug}
+            onChange={(e) => setItem({ ...item, slug: e.target.value })}
+            required
+          />
         </label>
 
         <label>
           Description
-          <textarea value={item.description} onChange={(e) => setItem({ ...item, description: e.target.value })} />
+          <textarea
+            value={item.description}
+            onChange={(e) => setItem({ ...item, description: e.target.value })}
+          />
         </label>
 
         <button className="green">Save Category</button>
@@ -923,6 +1098,7 @@ function Categories({ categories, save }) {
 }
 
 function Orders({ orders, update, archive, purge }) {
+  const [deleteOrder, setDeleteOrder] = useState(null);
   return (
     <>
       <div className="page-tools">
@@ -977,7 +1153,9 @@ function Orders({ orders, update, archive, purge }) {
                   </select>
                 </td>
                 <td>
-                  <span className={`status ${o.paymentStatus?.toLowerCase()}`}>{o.paymentStatus}</span>
+                  <span className={`status ${o.paymentStatus?.toLowerCase()}`}>
+                    {o.paymentStatus}
+                  </span>
                 </td>
                 <td>
                   <input
@@ -992,14 +1170,44 @@ function Orders({ orders, update, archive, purge }) {
                   />
                 </td>
                 <td>
-                  <button className="delete-btn" onClick={() => archive(o.id)}>Archive</button>
-                  {o.archived && <button className="icon-btn" onClick={() => { if (window.confirm("Permanently delete this archived order?")) purge(o.id); }}>Delete</button>}
+                  <button className="delete-btn" onClick={() => archive(o.id)}>
+                    Archive
+                  </button>
+                  {o.archived && (
+                    // <button
+                    //   className="icon-btn"
+                    //   onClick={() => {
+                    //     if (window.confirm("Permanently delete this archived order?")) purge(o.id);
+                    //   }}
+                    // >
+                    //   Delete
+                    // </button>
+                    <button
+                          className="delete-btn"
+                          onClick={() => setDeleteOrder(o)}
+                        >
+                          Delete
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </section>
+      <ConfirmModal
+          open={!!deleteOrder}
+          title="Permanently delete this archived order?"
+          message="This action cannot be undone. This order and all its details will be permanently deleted from the system."
+          confirmText="Delete Permanently"
+          danger
+          order={deleteOrder}
+          onCancel={() => setDeleteOrder(null)}
+          onConfirm={async () => {
+            await purge(deleteOrder.id);
+            setDeleteOrder(null);
+          }}
+        />
     </>
   );
 }
@@ -1009,7 +1217,11 @@ function Settings({ content, setContent, open, save }) {
     <div className="settings-layout">
       <section className="settings-tabs">
         {["settings", "home", "farm", "footer", "contact", "shipping"].map((key) => (
-          <button onClick={() => open(key)} className={content?.key === key ? "selected" : ""} key={key}>
+          <button
+            onClick={() => open(key)}
+            className={content?.key === key ? "selected" : ""}
+            key={key}
+          >
             {key === "settings" ? "General Settings" : `${key[0].toUpperCase()}${key.slice(1)} Settings`}
           </button>
         ))}
@@ -1050,15 +1262,211 @@ function Settings({ content, setContent, open, save }) {
 
 function DataStorage({ data, archive, restore, purge }) {
   const [query, setQuery] = useState("");
-  const collections = [["products", "Products", data.products], ["categories", "Categories", data.categories], ["farms", "Farms", data.farms], ["orders", "Orders", data.orders], ["users", "Customers", data.customers]];
-  const records = collections.flatMap(([collection, label, items]) => items.map(item => ({ collection, label, item }))).filter(({ item, label }) => `${label} ${item.name || item.orderNumber || ""} ${item.email || ""}`.toLowerCase().includes(query.toLowerCase()));
-  return <><div className="page-tools"><label><FiSearch/><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Find any saved record..." /></label><b>{records.length} records</b></div><section className="admin-table-card"><div className="card-title"><b>Data &amp; storage</b><span>Archive first; permanently delete only archived records.</span></div><table><thead><tr><th>Type</th><th>Record</th><th>Status</th><th>Actions</th></tr></thead><tbody>{records.map(({ collection, label, item }) => <tr key={`${collection}-${item.id}`}><td>{label}</td><td><b>{item.name || item.orderNumber || item.email}</b><small>{item.email || item.description || item.createdAt}</small></td><td><span className={item.archived ? "inactive-tag" : "active-tag"}>{item.archived ? "Archived" : "Active"}</span></td><td>{item.archived ? <><button className="icon-btn" onClick={() => restore(collection, item.id)}>Restore</button><button className="delete-btn" onClick={() => { if (window.confirm("Permanently delete this archived record?")) purge(collection, item.id); }}>Delete</button></> : <button className="delete-btn" onClick={() => archive(collection, item.id)}>Archive</button>}</td></tr>)}{!records.length && <tr><td colSpan="4">No matching records.</td></tr>}</tbody></table></section></>;
+  const [pendingDelete, setPendingDelete] = useState(null);
+
+  /*
+   * Only include collections that have archive / restore / delete
+   * APIs configured in productService.js and the backend.
+   *
+   * Customers/users are intentionally excluded here because
+   * archiveAdminRecord("users", id) is not configured.
+   *
+   * Customers are managed separately in the Customers section.
+   */
+  const collections = [
+    ["products", "Products", data.products],
+    ["categories", "Categories", data.categories],
+    ["farms", "Farms", data.farms],
+    ["orders", "Orders", data.orders],
+  ];
+
+  const records = collections
+    .flatMap(([collection, label, items]) =>
+      (items || []).map((item) => ({
+        collection,
+        label,
+        item,
+      }))
+    )
+    .filter(({ item, label }) =>
+      `${label} ${item.name || item.orderNumber || ""} ${
+        item.email || ""
+      }`
+        .toLowerCase()
+        .includes(query.toLowerCase())
+    );
+
+  return (
+    <>
+      {/* Search */}
+      <div className="page-tools">
+        <label>
+          <FiSearch />
+
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Find any saved record..."
+          />
+        </label>
+
+        <b>{records.length} records</b>
+      </div>
+
+      {/* Data Table */}
+      <section className="admin-table-card">
+        <div className="card-title">
+          <b>Data &amp; Storage</b>
+
+          <span>
+            Archive first; permanently delete only archived records.
+          </span>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Record</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {records.map(({ collection, label, item }) => (
+              <tr key={`${collection}-${item.id}`}>
+                {/* Type */}
+                <td>{label}</td>
+
+                {/* Record */}
+                <td>
+                  <b>
+                    {item.name ||
+                      item.orderNumber ||
+                      item.email ||
+                      "Unnamed record"}
+                  </b>
+
+                  <small>
+                    {item.email ||
+                      item.description ||
+                      item.createdAt ||
+                      ""}
+                  </small>
+                </td>
+
+                {/* Status */}
+                <td>
+                  <span
+                    className={
+                      item.archived
+                        ? "inactive-tag"
+                        : "active-tag"
+                    }
+                  >
+                    {item.archived ? "Archived" : "Active"}
+                  </span>
+                </td>
+
+                {/* Actions */}
+                <td>
+                  {item.archived ? (
+                    <>
+                      {/* Restore */}
+                      <button
+                        type="button"
+                        className="icon-btn"
+                        onClick={() =>
+                          restore(collection, item.id)
+                        }
+                      >
+                        Restore
+                      </button>
+
+                      {/* Permanent Delete */}
+                      <button
+                        type="button"
+                        className="delete-btn"
+                        onClick={() =>
+                          setPendingDelete({
+                            collection,
+                            label,
+                            item,
+                          })
+                        }
+                      >
+                        Delete
+                      </button>
+                    </>
+                  ) : (
+                    /* Archive */
+                    <button
+                      type="button"
+                      className="delete-btn"
+                      onClick={() =>
+                        archive(collection, item.id)
+                      }
+                    >
+                      Archive
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
+
+            {/* Empty state */}
+            {!records.length && (
+              <tr>
+                <td colSpan="4">
+                  No matching records.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </section>
+
+      {/* Permanent Delete Confirmation */}
+      <ConfirmModal
+        open={!!pendingDelete}
+        title={`Permanently delete this archived ${
+          pendingDelete?.label?.toLowerCase() ?? "record"
+        }?`}
+        message="This action cannot be undone. This record and all its details will be permanently deleted from the system."
+        confirmText="Delete Permanently"
+        danger
+        order={
+          pendingDelete?.collection === "orders"
+            ? pendingDelete.item
+            : null
+        }
+        onCancel={() => setPendingDelete(null)}
+        onConfirm={async () => {
+          if (!pendingDelete) {
+            return;
+          }
+
+          try {
+            await purge(
+              pendingDelete.collection,
+              pendingDelete.item.id
+            );
+          } finally {
+            setPendingDelete(null);
+          }
+        }}
+      />
+    </>
+  );
 }
 
 function Customers({ customers }) {
   const [query, setQuery] = useState("");
   const visible = customers.filter((customer) =>
-    `${customer.name} ${customer.email} ${customer.phone}`.toLowerCase().includes(query.toLowerCase())
+    `${customer.name} ${customer.email} ${customer.phone}`
+      .toLowerCase()
+      .includes(query.toLowerCase())
   );
 
   return (
@@ -1066,7 +1474,11 @@ function Customers({ customers }) {
       <div className="page-tools">
         <label>
           <FiSearch />
-          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search customers..." />
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search customers..."
+          />
         </label>
         <b>{visible.length} customers</b>
       </div>
@@ -1112,4 +1524,3 @@ const Placeholder = ({ title, configure }) => (
     </button>
   </section>
 );
-
